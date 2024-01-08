@@ -1,0 +1,48 @@
+@use "/Content/source/_Variables.scss" as v;
+@mixin howToRecord {
+  background-color: var(--bodyBack);
+  padding: 6em 4em;
+  > .content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6em;
+
+    > .right {
+      width: 38%;
+      font-size: 1.1em;
+      line-height: 1.6em;
+
+      > ol {
+        padding-right: 1em;
+        line-height: 2.2em;
+        margin-top: 0.5em;
+        > li {
+          list-style-type: decimal;
+        }
+      }
+    }
+    > .left {
+      width: 50%;
+    }
+  }
+
+  .courseVideo {
+    margin: 0;
+  }
+
+  @include v.media(v.$laptop) {
+    padding-top: 14em;
+
+    > .content {
+      flex-direction: column;
+
+      > .right,
+      .left {
+        width: 100%;
+      }
+      > .right {
+        font-size: 4.4em;
+      }
+    }
+  }
+}

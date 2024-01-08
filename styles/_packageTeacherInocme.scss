@@ -1,0 +1,86 @@
+@use "/Content/source/_Variables.scss" as v;
+@mixin income {
+  display: flex;
+  padding: 5em 4em;
+  background-color: var(--grayBg);
+  align-items: center;
+  gap: 3em;
+  > img {
+    width: 36%;
+  }
+  .content {
+    width: 64%;
+
+    > .title {
+      margin-bottom: 2em;
+    }
+
+    > .text {
+      width: 80%;
+      text-align: justify;
+      position: relative;
+      > p {
+        font-size: 1.1em;
+        line-height: 1.6em;
+      }
+      > ol {
+        padding-right: 1em;
+        li {
+          font-size: 1.1em;
+          line-height: 1.6em;
+          list-style-type: decimal;
+          color: var(--textColorStrong);
+          font-weight: 800;
+          margin-top: 1em;
+          > p {
+            display: inline;
+            font-weight: 400;
+          }
+        }
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 11em;
+        height: 15em;
+        background-image: url(/Content/images/packageTeacherIncomeCoin.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        top: -7.5em;
+        left: -6em;
+      }
+    }
+  }
+
+  @include v.media(v.$laptop) {
+    flex-direction: column-reverse;
+    padding-top: 8em;
+    padding-bottom: 0;
+    > .content {
+      width: 100%;
+      > .text {
+        width: 100%;
+        &::after {
+          top: -23em;
+          left: 7em;
+        }
+
+        >p{
+          font-size: 3.9em;
+        }
+        >ol{
+          padding-right: 4em;
+          li{
+            font-size: 3.9em;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    >img{
+      width: 70%;
+    }
+  }
+}

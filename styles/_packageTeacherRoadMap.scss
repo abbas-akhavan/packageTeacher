@@ -1,0 +1,217 @@
+@use "/Content/source/_Variables.scss" as v;
+@mixin roadMap {
+  background-color: var(--mainBlue);
+  display: flex;
+  flex-direction: column;
+  padding-top: 13em;
+  position: relative;
+
+  > .title {
+    color: var(--whiteTxt);
+    text-align: center;
+  }
+  .roadMap {
+    background-image: url("/Content/images/taecherRoadMapLines.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 90%;
+    margin: auto;
+    margin-block: 15em 11em;
+    height: 23em;
+    position: relative;
+
+    > .stations {
+      > span {
+        position: absolute;
+        --wid: 8em;
+        width: var(--wid);
+        height: var(--wid);
+        background-color: var(--whiteBg);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-weight: 600;
+        padding-inline: 1.2em;
+        line-height: 1.5em;
+        &:nth-child(1) {
+          top: 12.2em;
+          left: 74.2em;
+        }
+        &:nth-child(2) {
+          top: 2.2em;
+          left: 59em;
+        }
+        &:nth-child(3) {
+          top: 12.2em;
+          left: 44em;
+        }
+        &:nth-child(4) {
+          top: 2.2em;
+          left: 28.6em;
+        }
+        &:nth-child(5) {
+          top: 12.2em;
+          left: 14.8em;
+        }
+      }
+    }
+
+    > .numbers {
+      > span {
+        position: absolute;
+        --wid: 1.9em;
+        width: var(--wid);
+        height: var(--wid);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2em;
+        font-weight: 600;
+        border-radius: 50%;
+        top: 4.3em;
+
+        &:nth-child(1) {
+          left: 31.95em;
+          color: #2900c2;
+        }
+        &:nth-child(2) {
+          left: 25.1em;
+          color: #006196;
+        }
+        &:nth-child(3) {
+          left: 18.2em;
+          color: #109100;
+        }
+        &:nth-child(4) {
+          left: 11.3em;
+          color: #bb2500;
+        }
+        &:nth-child(5) {
+          left: 4.9em;
+          color: #ab8800;
+        }
+      }
+    }
+
+    > .description {
+      > p {
+        position: absolute;
+        color: var(--whiteTxt);
+        font-size: 1.1em;
+        width: 12em;
+        line-height: 1.6em;
+
+        &:nth-child(1) {
+          top: -5.3em;
+          left: 59.6em;
+        }
+        &:nth-child(2) {
+          top: 22em;
+          left: 46.2em;
+        }
+        &:nth-child(3) {
+          top: -5.3em;
+          left: 32.5em;
+        }
+        &:nth-child(4) {
+          top: 22em;
+          left: 18.5em;
+        }
+        &:nth-child(5) {
+          top: -5.3em;
+          left: 5.8em;
+        }
+      }
+    }
+  }
+
+  @include v.media(v.$laptop) {
+    padding-top: 22em;
+
+    .roadMap {
+      background-image: url(/Content/images/taecherRoadMapLinesRes.png);
+      margin: 0;
+      width: 100%;
+      background-position: center;
+      margin-top: 0em;
+      background-size: 57%;
+      height: 206em;
+      > .numbers {
+        > span {
+          font-size: 6.5em;
+          &:nth-child(1) {
+            left: 6.8em;
+            top: 5.7em;
+          }
+          &:nth-child(2) {
+            top: 11.7em;
+            left: 6.8em;
+          }
+          &:nth-child(3) {
+            top: 17.7em;
+            left: 6.8em;
+          }
+          &:nth-child(4) {
+            top: 23.45em;
+            left: 6.8em;
+          }
+          &:nth-child(5) {
+            top: 29.2em;
+            left: 6.8em;
+          }
+        }
+      }
+      > .stations {
+        > span {
+          font-size: 3em;
+          &:nth-child(1) {
+            top: 5.1em;
+            left: 22em;
+          }
+          &:nth-child(2) {
+            top: 18em;
+            left: 3.3em;
+          }
+          &:nth-child(3) {
+            top: 31em;
+            left: 22em;
+          }
+          &:nth-child(4) {
+            top: 43.7em;
+            left: 3.3em;
+          }
+          &:nth-child(5) {
+            top: 56.2em;
+            left: 22em;
+          }
+        }
+      }
+      > .description {
+        > p {
+          font-size: 3.3em;
+          &:nth-child(1) {
+            top: 6.8em;
+            left: 2em;
+          }
+          &:nth-child(2) {
+            top: 18.8em;
+            left: 16.6em;
+          }
+          &:nth-child(3) {
+            top: 29.8em;
+            left: 2em;
+          }
+          &:nth-child(4) {
+            top: 41.4em;
+            left: 16.5em;
+          }
+          &:nth-child(5) {
+            top: 52.8em;
+            left: 2em;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+﻿@font-face {
+    font-family: yekanBakh;
+    font-style: normal;
+    font-weight: 400;
+    src:
+    url('/Content/Font/YekanBakhFaNum/woff2/YekanBakhFaNum-Regular.woff2') format('woff2'),
+    url('/Content/Font/YekanBakhFaNum/woff/YekanBakhFaNum-Regular.woff') format('woff'),
+    url('/Content/Font/YekanBakhFaNum/TTF/YekanBakhFaNum-Regular.ttf') format('ttf');
+}
+@font-face {
+    font-family: yekanBakh;
+    font-style: normal;
+    font-weight: 500;
+    src:
+    url('/Content/Font/YekanBakhFaNum/woff2/YekanBakhFaNum-SemiBold.woff2') format('woff2'),
+    url('/Content/Font/YekanBakhFaNum/woff/YekanBakhFaNum-SemiBold.woff') format('woff'),
+    url('/Content/Font/YekanBakhFaNum/TTF/YekanBakhFaNum-Regular.ttf') format('ttf');
+}
+@font-face {
+    font-family: yekanBakh;
+    font-style: normal;
+    font-weight: bold;//700
+    src:
+    url('/Content/Font/YekanBakhFaNum/woff2/YekanBakhFaNum-Bold.woff2') format('woff2'),
+    url('/Content/Font/YekanBakhFaNum/woff/YekanBakhFaNum-Bold.woff') format('woff'),
+    url('/Content/Font/YekanBakhFaNum/TTF/YekanBakhFaNum-Bold.ttf') format('ttf');
+}
+@font-face {
+    font-family: yekanBakh;
+    font-style: normal;
+    font-weight: 800;
+    src:
+    url('/Content/Font/YekanBakhFaNum/woff2/YekanBakhFaNum-Black.woff2') format('woff2'),
+    url('/Content/Font/YekanBakhFaNum/woff/YekanBakhFaNum-Black.woff') format('woff'),
+    url('/Content/Font/YekanBakhFaNum/TTF/YekanBakhFaNum-Black.ttf') format('ttf');
+}

@@ -1,0 +1,59 @@
+@use 'styles/_packageTeacherTitr' as titr;
+@use 'styles/_packageTeacherRoadMap' as roadMap;
+@use 'styles/_packageTeacherHowToRecord.scss' as howToRecord;
+@use 'styles/_packageTeacherInocme.scss' as income;
+@use 'styles/_packageTeacherCv.scss' as cv;
+@use "styles/_courseVideo.scss" as video;
+@use "styles/_packageTeacherTitle.scss" as title;
+@use "/Content/source/_Variables.scss" as v;
+
+
+#packageTeacher{
+    font-size: 1vw;
+    --mainBlue : #2387C9;
+    --whiteTxt : white;
+    --whiteBg : white;
+    --grayBg : #ECECEC;
+    --inputBorderColor : #e0e0e0;
+    --labelTextColor : #B4B4B4;
+    --inputTextColor : #797979;
+    --checkBoxListBg : #EFEFEF;
+    .courseVideo{
+        @include video.courseVideo;
+        >img{
+            top: 50%;
+            bottom: unset;
+            left: 50%;
+            right: unset;
+            transform: translate(-50% , -50%);
+        }
+    }
+    .title{
+        @include title.title;
+    }
+
+    .titr{
+        @include titr.titr;
+    }
+
+    .teacherRoadMap{
+        @include roadMap.roadMap;
+    }
+    .howToRecord{
+        @include howToRecord.howToRecord;
+    }
+    .income{
+        @include income.income;
+    }
+    .cv{
+        @include cv.cv;
+    }
+
+    @include v.media(v.$laptop){
+        .courseVideo {
+            max-width: unset;
+            font-size: 2.5em;
+            margin-top: 3em;
+          }
+    }
+}

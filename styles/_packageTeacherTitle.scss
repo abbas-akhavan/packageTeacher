@@ -1,0 +1,115 @@
+@use "/Content/source/_Variables.scss" as v;
+@mixin title {
+  color: var(--textColorStrong);
+  font-weight: 800;
+  font-size: 1.7em;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    top: calc(100% + 0.8em);
+    left: 0;
+    height: 0.1em;
+    background-image: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--mainBlue) 50%,
+      transparent 100%
+    );
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    --wid: 0.35em;
+    width: var(--wid);
+    height: var(--wid);
+    background-color: var(--mainBlue);
+    top: calc(100% + 0.8em);
+    right: 0;
+    transform: translateY(-50%);
+    border-radius: 50%;
+  }
+
+  &.center {
+    text-align: center;
+    &::before {
+      top: calc(100% + 0.8em);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      right: unset;
+    }
+    &::after {
+      background-image: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--mainBlue) 25%,
+        transparent 50%,
+        var(--mainBlue) 75%,
+        transparent 100%
+      );
+    }
+
+    &.white {
+      &::after {
+        background-image: linear-gradient(
+          to right,
+          transparent 0%,
+          var(--whiteBg) 25%,
+          transparent 50%,
+          var(--whiteBg) 75%,
+          transparent 100%
+        );
+      }
+
+      &::before {
+        background-color: var(--whiteBg);
+      }
+    }
+  }
+  &.white {
+    &::after {
+      background-image: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--whiteBg) 50%,
+        transparent 100%
+      );
+    }
+    &::before {
+      background-color: var(--whiteBg);
+    }
+  }
+
+  @include v.media(v.$laptop) {
+    font-size: 5em;
+    text-align: center;
+    font-weight: 700;
+
+    &::after {
+      top: unset;
+      bottom: calc(100% + 0.8em);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0.1em;
+      height: 1.4em;
+      background-image: linear-gradient(
+        to top,
+        transparent 0%,
+        var(--mainBlue) 50%,
+        transparent 100%
+      ) !important;
+    }
+
+    &::before {
+      top: unset !important;
+      bottom: calc(100% + 0.3em) !important;
+      right: 50% !important;
+      transform: translateX(50%) !important;
+    }
+    &.center {
+      z-index: 1;
+    }
+  }
+}
