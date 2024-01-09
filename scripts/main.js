@@ -125,9 +125,9 @@ class formValidation{
     let validations = JSON.parse(input.dataset.validate);
     let errorMassageEl = inputParent.querySelector('.validationMsg');
     
-    let isValidateInput = this.validateInput(input , validations);
+    let isValidInput = this.validateInput(input , validations);
     debugger;
-    if(!(isValidateInput.isValid)){
+    if(!(isValidInput.isValid)){
       inputParent.classList.add('error');
       errorMassageEl.innerHTML = isValidateInput.errorMsg;
     }
