@@ -81,7 +81,7 @@
       .inputContainer {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-start;
         color: var(--labelTextColor);
         margin-bottom: 1em;
 
@@ -94,7 +94,7 @@
 
         > .validationMsg {
           overflow: hidden;
-          max-height: 0;
+          height: 0;
           color: red;
           transition: all 0.3s;
           margin-top: 0.5em;
@@ -161,7 +161,7 @@
           border-color: red;
         }
         .validationMsg {
-          max-height: 2em;
+          height: 2em;
         }
       }
 

@@ -111,24 +111,29 @@ class formValidation{
   constructor(form){
     this.inputsRequiringValidation = form.queries('[data-validate]');
     this.setValidationForInputs();
+    this.isValidForm = true;
   }
 
   setValidationForInputs(){
     this.inputsRequiringValidation.forEach(input => {
-      input.addEventListener('blur', this.checkInput.bind(this))
+      input.addEventListener('blur', this.checkInput.bind(this , input))
     })
   }
 
-  checkInput(e){
-    const input = e.target;
+  checkInput(input){
     const inputParent = input.closest('.parent');
     let validations = JSON.parse(input.dataset.validate);
     let errorMassageEl = inputParent.querySelector('.validationMsg');
     
     let isValidateInput = this.validateInput(input , validations);
+    debugger;
     if(!(isValidateInput.isValid)){
       inputParent.classList.add('error');
       errorMassageEl.innerHTML = isValidateInput.errorMsg;
+    }
+    else{
+      inputParent.classList.remove('error');
+      errorMassageEl.innerHTML = '';
     }
   }
 
@@ -136,10 +141,24 @@ class formValidation{
     let isValid = true;
     let errorMsg = '';
     for(let validate of validations){
-      switch(validate){
-        case 'noEmpty':
-          isValid =  isEmpty(input) ? false : true;
-          errorMsg = 'لطفا کادر را خالی نگذارید';
+      switch (validate) {
+        case "noEmpty":
+          if (this.isEmpty(input)) {
+            isValid = false;
+            errorMsg = "لطفا کادر را خالی نگذارید";
+          }
+          break;
+        case "number":
+          if(!(this.isNumber(input))){
+            isValid = false;
+            errorMsg = "فقط مقدار عددی مجاز میباشد";
+          }
+          break;
+          case "onlyLetters":
+          if(!(this.isLetters(input))){
+            isValid = false;
+            errorMsg = "فقط حروف فارسی و انگلیسی مجاز میباشد";
+          }
           break;
       }
       if(!isValid) {
@@ -149,6 +168,37 @@ class formValidation{
 
     return {isValid : isValid , errorMsg : errorMsg}
   }
+
+  isEmpty(inputEl){
+    if(inputEl.value.trim() === ''){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  isNumber(inputEl){
+    const numRegEx = /^\d+$/;
+    if(numRegEx.test(inputEl.value)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  isLetters(inputEl){
+    const regEx = /^[a-z\u0600-\u06FF\s]+$/i;
+    if(regEx.test(inputEl.value)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
 }
 const formEl = dc.query('form');
 const formVal = new formValidation(formEl);

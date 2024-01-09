@@ -105,17 +105,17 @@
       <div>
         <label class="parent inline inputContainer error">
           <span>نام</span>
-          <input type="text" name="fname" placeholder="نام" data-validate='["noEmpty"]'>
+          <input type="text" name="fname" placeholder="نام" data-validate='["noEmpty" , "onlyLetters"]'>
           <span class="validationMsg">لطفا کارد را خالی نگذارید!</span>
         </label>
         <label class="parent inline inputContainer">
           <span>شماره موبایل</span>
-          <input type="text" name="phoneNumber" placeholder="شماره موبایل" data-validate='["noEmpty"]'>
+          <input type="text" name="phoneNumber" placeholder="شماره موبایل" data-validate='["noEmpty" , "number"]'>
           <span class="validationMsg">لطفا کارد را خالی نگذارید!</span>
         </label>
-        <label class="inline inputContainer">
+        <label class="parent inline inputContainer">
           <span>نام خانوادگی</span>
-          <input type="text" name="lname" placeholder="نام خانوادگی">
+          <input type="text" name="lname" placeholder="نام خانوادگی" data-validate='["noEmpty" , "onlyLetters"]'>
           <span class="validationMsg">لطفا کارد را خالی نگذارید!</span>
         </label>
         <label class="inline inputContainer">
