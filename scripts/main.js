@@ -109,7 +109,8 @@ listItems.forEach((item) => {
 
 class formValidation{
   constructor(form){
-    this.inputsRequiringValidation = form.queries('[data-validate]');
+    this.form = form;
+    this.inputsRequiringValidation = this.form.queries('[data-validate]');
     this.setValidationForInputs();
     this.isValidForm = true;
   }
@@ -129,7 +130,7 @@ class formValidation{
     debugger;
     if(!(isValidInput.isValid)){
       inputParent.classList.add('error');
-      errorMassageEl.innerHTML = isValidateInput.errorMsg;
+      errorMassageEl.innerHTML = isValidInput.errorMsg;
     }
     else{
       inputParent.classList.remove('error');
