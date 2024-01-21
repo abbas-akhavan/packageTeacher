@@ -118,64 +118,64 @@
           <input type="text" name="lname" placeholder="نام خانوادگی" data-validate='["noEmpty" , "onlyLetters"]'>
           <span class="validationMsg">لطفا کارد را خالی نگذارید!</span>
         </label>
-        <label class="inline inputContainer">
+        <label class="parent inline inputContainer">
           <span>ایمیل</span>
-          <input type="email" name="email" placeholder="ایمیل">
+          <input type="email" name="email" placeholder="ایمیل" data-validate='["noEmpty" , "email"]'>
           <span class="validationMsg">لطفا کارد را خالی نگذارید!</span>
         </label>
-        <label class="inline inputContainer">
+        <label class="parent inline inputContainer">
           <span>تاریخ تولد</span>
           <input type="text" name="birthDay" placeholder="تاریخ تولد">
           <span class="validationMsg">لطفا کارد را خالی نگذارید!</span>
         </label>
-        <div class="inline inputContainer">
+        <div class="parent inline inputContainer">
           <span>جنسیت</span>
           <div class="radioGroup">
-            <input type="radio" name="gender" id="male" value="male">
+            <input type="radio" name="gender" id="male" value="male" data-validate='["radio"]'>
             <label for="male">
               مرد
             </label>
-            <input type="radio" name="gender" id="female" value="female">
+            <input type="radio" name="gender" id="female" value="female" data-validate='["radio"]'>
             <label for="female">
               زن
             </label>
           </div>
           <span class="validationMsg">لطفا کارد را خالی نگذارید!</span>
         </div>
-        <div class="block inputContainer">
+        <div class="parent block inputContainer">
           <span>وضعیت نظام وظیفه</span>
           <div class="radioGroup">
-            <input type="radio" name="military" id="end" value="end">
+            <input type="radio" name="military" id="end" value="end" data-validate='["radio"]'>
             <label for="end">
               پایان خدمت
             </label>
-            <input type="radio" name="military" id="permanentExemption" value="permanentExemption">
+            <input type="radio" name="military" id="permanentExemption" value="permanentExemption" data-validate='["radio"]'>
             <label for="permanentExemption">
               معافیت دائم
             </label>
-            <input type="radio" name="military" id="educationExemption" value="educationExemption">
+            <input type="radio" name="military" id="educationExemption" value="educationExemption" data-validate='["radio"]'>
             <label for="educationExemption">
               معافیت تحصیلی
             </label>
-            <input type="radio" name="military" id="doing" value="doing">
+            <input type="radio" name="military" id="doing" value="doing" data-validate='["radio"]'>
             <label for="doing">
               در حال انجام
             </label>
-            <input type="radio" name="military" id="included" value="included">
+            <input type="radio" name="military" id="included" value="included" data-validate='["radio"]'>
             <label for="included">
               مشمول
             </label>
           </div>
           <span class="validationMsg">لطفا کارد را خالی نگذارید!</span>
         </div>
-        <div class="block inputContainer">
+        <div class="parent block inputContainer">
           <span>آیا سابقه تدریس پکیج دارید؟</span>
           <div class="radioGroup">
-            <input type="radio" name="teaching" id="yes" value="yes">
+            <input type="radio" name="teaching" id="yes" value="yes" data-validate='["radio"]'>
             <label for="yes">
               بله
             </label>
-            <input type="radio" name="teaching" id="no" value="no">
+            <input type="radio" name="teaching" id="no" value="no" data-validate='["radio"]'>
             <label for="no">
               خیر
             </label>
@@ -184,63 +184,29 @@
         </div>
         <p class="block">آموزش هایی که تمایل به ارائه آنها دارید را انتخاب کنید.</p>
         <p class="block label">(در انتخاب تعداد عناوین محدودیتی وجود ندارد)</p>
-        <div class="inline checkBoxList">
+        <div class="parent inline checkBoxList">
           <span data-onclick="active">انتخاب کنید...
             <div class="checkList">
-              <input type="checkbox" name="favTraining1" value="webDesign" id="1" data-text="طراحی سایت">
+              <input type="checkbox" name="favTraining" value="webDesign" id="1" data-text="طراحی سایت" data-validate='["checkbox"]'>
               <label for="1">
                 <span>طراحی سایت</span>
                 <span></span>
               </label>
-              <input type="checkbox" name="favTraining2" value="python" id="2" data-text="پایتون">
+              <input type="checkbox" name="favTraining" value="python" id="2" data-text="پایتون" data-validate='["checkbox"]'>
               <label for="2">
                 <span>پایتون</span>
                 <span></span>
               </label>
-              <input type="checkbox" name="favTraining3" value="cSharp" id="3" data-text="سی شارپ">
+              <input type="checkbox" name="favTraining" value="cSharp" id="3" data-text="سی شارپ" data-validate='["checkbox"]'>
               <label for="3">
                 <span>سی شارپ</span>
                 <span></span>
               </label>
             </div>
           </span>
-          <div class="removeableItems">
-            <span>
-              <span class="remove">&times;</span>
-              طراحی سایت
-            </span>
-          </div>
-        </div>
-        <div class="inline checkBoxList">
-          <span data-onclick="active">انتخاب کنید...
-            <div class="checkList">
-              <input type="checkbox" name="favTraining1" value="webDesign" id="4" data-text="طراحی سایت">
-              <label for="4">
-                <span>طراحی سایت</span>
-                <span></span>
-              </label>
-              <input type="checkbox" name="favTraining2" value="python" id="5" data-text="پایتون">
-              <label for="5">
-                <span>پایتون</span>
-                <span></span>
-              </label>
-              <input type="checkbox" name="favTraining3" value="cSharp" id="6" data-text="سی شارپ">
-              <label for="6">
-                <span>سی شارپ</span>
-                <span></span>
-              </label>
-            </div>
-          </span>
-          <div class="removeableItems">
-            <span>
-              <span class="remove">&times;</span>
-              طراحی سایت
-            </span>
-            <span>
-              <span class="remove">&times;</span>
-              پایتون
-            </span>
-          </div>
+          <span class="validationMsg"></span>
+          <div class="removeableItems"></div>
+          
         </div>
         <p for="otherFavTraining" class="block">در صورتی که زمینه کاری شما در لیست بالا موجود نیست در کادر زیر آن را وارد کنید</p>
         <textarea name="otherFavTraining" id="otherFavTraining"></textarea>
@@ -256,17 +222,16 @@
           <p class="block"></p>
         </div>
         <p class="block">رزومه خود را به صورت فایل PDF آپلود کنید</p>
-        <div class="select-file">
-          <input type="file" id="resumefile" name="resumefile">
+        <div class="parent select-file">
+          <input type="file" id="resumefile" name="resumefile" accept=".pdf" data-validate='["fileSelect"]'>
           <label for="resumefile" class="button-o upload">آپلود رزومه</label>
           <div class="removeableItems">
-            <span>
-              <span class="remove">&times;</span>
-              طراحی سایت
-            </span>
           </div>
+          <span class="validationMsg"></span>
         </div>
+        
       </div>
+      <input type="submit" class="button" value="ثبت ">
     </form>
     </section>
   </main>

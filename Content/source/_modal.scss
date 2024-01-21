@@ -17,7 +17,7 @@
     align-items: center;
     transition-property: opacity, transform;
     transition: 0.5s cubic-bezier(.1, .28, .23, 1.86);
-    font-size: calc(1em * var(---scale));
+    font-size: calc(1em * var(--scale));
 
     //general
     a.full {

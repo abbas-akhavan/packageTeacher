@@ -146,7 +146,8 @@
             setTimeout(closeModal, duration);
         }, { close: 'all' })
     }
-    function successFail(msg, duration = 5000, failed) {
+    function successFail(msg, duration = 5000, failed , scale) {
+        modal.style = `--scale : ${scale}`
         let content = document.createElement('div');
         let icon = document.createElement('i');
         let br = document.createElement('br');
@@ -354,8 +355,8 @@
     }
 
     callModal.notif = notif;
-    callModal.success = (msg, duration) => successFail(msg, duration, false);
-    callModal.fail = (msg, duration) => successFail(msg, duration, true);
+    callModal.success = (msg, duration , scale = 1) => successFail(msg, duration, false , scale);
+    callModal.fail = (msg, duration , scale = 1) => successFail(msg, duration, true , scale);
     callModal.confirm = confirm;
     callModal.custom = prepearModal;
     callModal.spinner = (func, alt = false) => {

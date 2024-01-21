@@ -41,6 +41,51 @@
     line-height: 1.6em;
   }
 
+  .button,
+  .button-o {
+    border-radius: 0.5em;
+    font-size: 1em;
+    cursor: pointer;
+    width: fit-content;
+  }
+  .button {
+    background-color: var(--mainBlue);
+    color: white;
+    padding: 0.5em 0.7em;
+  }
+  .button-o {
+    color: var(--mainBlue);
+    border: 2px solid var(--mainBlue);
+    display: flex;
+    align-items: center;
+    padding: 0.3em 0.7em;
+    margin-bottom: 1em;
+
+    &.plus {
+      &::before {
+        background-position: -8.3em;
+      }
+    }
+
+    &.upload {
+      &::before {
+        background-position: -11.8em;
+      }
+    }
+    &::before {
+      content: "";
+      --wid: 2em;
+      width: var(--wid);
+      height: var(--wid);
+      background-repeat: no-repeat;
+      background-size: 987%;
+      background-image: url(/Content/images/icons.png);
+    }
+  }
+  [class^="button"] {
+    cursor: pointer;
+    user-select: none;
+  }
   > form {
     width: 77%;
     margin: auto;
@@ -48,10 +93,14 @@
     padding: 3em 6em;
     border: 2px solid var(--inputBorderColor);
     border-radius: 1.1em;
-    [class^="button"] {
-      cursor: pointer;
-      user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    > .title {
+      width: 100%;
     }
+
     input,
     textarea {
       font-family: yekanBakh;
@@ -86,18 +135,10 @@
         margin-bottom: 1em;
 
         > input {
-          border: 2px solid var(--inputBorderColor);
+          border: 1px solid var(--inputBorderColor);
           border-radius: 0.5em;
           font-size: 1em;
           padding: 0.5em 0.7em;
-        }
-
-        > .validationMsg {
-          overflow: hidden;
-          height: 0;
-          color: red;
-          transition: all 0.3s;
-          margin-top: 0.5em;
         }
 
         > .radioGroup {
@@ -156,6 +197,14 @@
         }
       }
 
+      .validationMsg {
+        overflow: hidden;
+        height: 0;
+        color: red;
+        transition: all 0.3s;
+        margin-top: 0.5em;
+        font-size: .8em;
+      }
       .error {
         input {
           border-color: red;
@@ -207,9 +256,10 @@
         flex-direction: column;
         position: relative;
         gap: 1em;
-        margin-bottom: 4em;
+        margin-bottom: 1em;
         > span {
-          position: relative;
+          &:nth-of-type(1){
+            position: relative;
           width: 100%;
           border: 2px solid var(--inputBorderColor);
           color: var(--inputTextColor);
@@ -322,6 +372,7 @@
               opacity: 1;
             }
           }
+          }
         }
       }
       textarea {
@@ -332,47 +383,9 @@
         margin-block: 0.5em 2em;
         resize: none;
         font-size: 1em;
-        padding: .5em 1em;
+        padding: 0.5em 1em;
       }
-      .button,
-      .button-o {
-        border-radius: 0.5em;
-        font-size: 1em;
-      }
-      .button {
-        background-color: var(--mainBlue);
-        color: white;
-        padding: 0.5em 0.7em;
-      }
-      .button-o {
-        color: var(--mainBlue);
-        border: 2px solid var(--mainBlue);
-        display: flex;
-        align-items: center;
-        padding: 0.3em 0.7em;
-        margin-bottom: 1em;
 
-        &.plus {
-          &::before {
-            background-position: -8.3em;
-          }
-        }
-
-        &.upload {
-          &::before {
-            background-position: -11.8em;
-          }
-        }
-        &::before {
-          content: "";
-          --wid: 2em;
-          width: var(--wid);
-          height: var(--wid);
-          background-repeat: no-repeat;
-          background-size: 987%;
-          background-image: url(/Content/images/icons.png);
-        }
-      }
       .itemList {
         display: none;
         flex-wrap: wrap;

@@ -14,6 +14,13 @@ if (courseVideos.length > 0) {
     };
   });
 }
+
+
+
+//-----------------------------------------------------
+
+
+
 //create reuseable class for checkBox list
 class checkBoxList {
   constructor(checkBoxList) {
@@ -66,6 +73,12 @@ checkBoxListsElements.forEach((item) => {
   checkBoxListObjects.push(checkBoxListObject);
 });
 
+
+
+//-----------------------------------------------------
+
+
+
 //create reuseable listItem class
 class itemList {
   constructor(itemList) {
@@ -83,9 +96,8 @@ class itemList {
       this.removeableItems.innerHTML += newItem;
       this.input.value = "";
       this.removeBtnsSetEvent();
-    }
-    else{
-        this.input.value = "";
+    } else {
+      this.input.value = "";
     }
   }
   removeBtnsSetEvent() {
@@ -105,43 +117,94 @@ listItems.forEach((item) => {
   listItemObjects.push(listItemObject);
 });
 
+
+
+//-----------------------------------------------------
+
+
+
 //create class for form validation
 
-class formValidation{
-  constructor(form){
+class formValidation {  
+  constructor(form) {
     this.form = form;
-    this.inputsRequiringValidation = this.form.queries('[data-validate]');
+    this.inputsRequiringValidation = this.form.queries("[data-validate]");
     this.setValidationForInputs();
+    this.setSubmitValidationForForm();
     this.isValidForm = true;
   }
 
-  setValidationForInputs(){
-    this.inputsRequiringValidation.forEach(input => {
-      input.addEventListener('blur', this.checkInput.bind(this , input))
-    })
+  setValidationForInputs() {
+    this.inputsRequiringValidation.forEach((input) => {
+      if (input.type === "radio" || input.type === "checkbox" || input.type === "file") {
+        input.addEventListener("change", this.checkInput.bind(this, input));
+      } else {
+        input.addEventListener("blur", this.checkInput.bind(this, input));
+      }
+    });
   }
 
-  checkInput(input){
-    const inputParent = input.closest('.parent');
-    let validations = JSON.parse(input.dataset.validate);
-    let errorMassageEl = inputParent.querySelector('.validationMsg');
-    
-    let isValidInput = this.validateInput(input , validations);
-    debugger;
-    if(!(isValidInput.isValid)){
-      inputParent.classList.add('error');
-      errorMassageEl.innerHTML = isValidInput.errorMsg;
+  setSubmitValidationForForm() {
+    this.form.addEventListener("submit", this.validateFormOnSubmit.bind(this));
+  }
+
+  validateFormOnSubmit(e) {
+    e.preventDefault();
+    this.isValidForm = true;
+    for(let input of this.inputsRequiringValidation){
+      this.checkInput(input);
+    }
+    if (this.isValidForm) {
+      // this.form.submit();
+      const formData = new FormData(e.target);
+      const formDataObject = Object.fromEntries(formData.entries())
+      formDataObject.favTraining = formData.getAll('favTraining');
+      fetch('server.htm' , {
+        method: 'POST',
+        body: JSON.stringify(formDataObject),
+        headers : {
+          "Content-Type": "application/json",
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      })
+      .then(response => response.text())
+      .then(data => { 
+        if(data === 'ok'){
+          callModal.success('روزمه شما با موفقیت ثبت شد' , 2000 , 1.5);
+          this.clearForm();
+        }
+        else{
+          callModal.fail('مشکلی پیش آمد لطفا دوباره سعی کنید' , 2000 , 1.5)
+        }
+      })
+      
     }
     else{
-      inputParent.classList.remove('error');
-      errorMassageEl.innerHTML = '';
+      callModal.fail('اطلاعات خود را به طور کامل وارد کنید' , 2000 , 1.5)
     }
   }
 
-  validateInput(input , validations){
+  checkInput(input) {
+    const inputParent = input.closest(".parent");
+    let validations = JSON.parse(input.dataset.validate);
+    let errorMassageEl = inputParent.querySelector(".validationMsg");
+    let isValidInput = this.validateInput(input, validations);
+    if (!isValidInput.isValid) {
+      inputParent.classList.add("error");
+      errorMassageEl.innerHTML = isValidInput.errorMsg;
+      if(this.isValidForm){
+        this.isValidForm = false;
+      }
+    } else {
+      inputParent.classList.remove("error");
+      errorMassageEl.innerHTML = "";
+    }
+  }
+
+  validateInput(input, validations) {
     let isValid = true;
-    let errorMsg = '';
-    for(let validate of validations){
+    let errorMsg = "";
+    for (let validate of validations) {
       switch (validate) {
         case "noEmpty":
           if (this.isEmpty(input)) {
@@ -150,56 +213,198 @@ class formValidation{
           }
           break;
         case "number":
-          if(!(this.isNumber(input))){
+          if (!this.isNumber(input)) {
             isValid = false;
             errorMsg = "فقط مقدار عددی مجاز میباشد";
           }
           break;
-          case "onlyLetters":
-          if(!(this.isLetters(input))){
+        case "onlyLetters":
+          if (!this.isLetters(input)) {
             isValid = false;
             errorMsg = "فقط حروف فارسی و انگلیسی مجاز میباشد";
           }
           break;
+        case "email":
+          if (!this.isEmail(input)) {
+            isValid = false;
+            errorMsg = "لطفا ایمیل معتبر وارد کنید";
+          }
+          break;
+        case "radio":
+          if (!this.radioIsChecked(input)) {
+            isValid = false;
+            errorMsg = "یک مورد را انتخاب کنید";
+          }
+          break;
+        case "checkbox":
+          if (!this.checkBoxChecked(input)) {
+            isValid = false;
+            errorMsg =
+              "حداقل یک مورد را انتخاب کنید یا زمینه کاری خود را در کارد زیر وارد کنید";
+          }
+          break;
+        case "fileSelect":
+          if (!this.fileSelected(input)) {
+            isValid = false;
+            errorMsg = "لطفا فایل رزومه خود را انتخاب کنید";
+          }
+          break;
       }
-      if(!isValid) {
+      if (!isValid) {
         break;
       }
     }
 
-    return {isValid : isValid , errorMsg : errorMsg}
+    return { isValid: isValid, errorMsg: errorMsg };
   }
 
-  isEmpty(inputEl){
-    if(inputEl.value.trim() === ''){
+  isEmpty(inputEl) {
+    if (inputEl.value.trim() === "") {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }
 
-  isNumber(inputEl){
+  isNumber(inputEl) {
     const numRegEx = /^\d+$/;
-    if(numRegEx.test(inputEl.value)){
+    if (numRegEx.test(inputEl.value)) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }
 
-  isLetters(inputEl){
+  isLetters(inputEl) {
     const regEx = /^[a-z\u0600-\u06FF\s]+$/i;
-    if(regEx.test(inputEl.value)){
+    if (regEx.test(inputEl.value)) {
       return true;
+    } else {
+      return false;
     }
-    else{
+  }
+  isEmail(inputEl) {
+    const regEx =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (regEx.test(inputEl.value)) {
+      return true;
+    } else {
       return false;
     }
   }
 
+  fileSelected(inputEl) {
+    if (inputEl.files.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  radioIsChecked(inputEl) {
+    let radioName = inputEl.name;
+    const RadioButtonsGroup = this.form.queries(`[name='${radioName}']`);
+    let hasBeenSelected = false;
+    for (let radio of RadioButtonsGroup) {
+      if (radio.checked) {
+        hasBeenSelected = true;
+        break;
+      }
+    }
+    return hasBeenSelected;
+  }
 
+  checkBoxChecked(inputEl) {
+    const parentEl = inputEl.closest(".parent");
+    const otherFavTrainingTextArea = this.form.query(
+      '[name="otherFavTraining"]'
+    );
+    let checkboxesGroup = parentEl.querySelectorAll('input[type="checkbox"]');
+    let hasBeenSelected = false;
+    for (let checkBox of checkboxesGroup) {
+      if (checkBox.checked) {
+        hasBeenSelected = true;
+        break;
+      }
+    }
+    if (!(otherFavTrainingTextArea.value.trim() === "")) {
+      hasBeenSelected = true;
+    }
+
+    return hasBeenSelected;
+  }
+
+  clearForm(){
+    this.form.reset();
+      this.form.querySelector('.select-file .removeableItems').innerHTML = '';
+      this.form.querySelector('.checkBoxList .removeableItems').innerHTML = '';
+  }
 }
-const formEl = dc.query('form');
+const formEl = dc.query("form");
 const formVal = new formValidation(formEl);
+
+
+
+//-----------------------------------------------------
+
+
+
+
+
+//deactive clicker elements if click outside them
+const clickerElements = dc.queries("[data-onclick]");
+document.addEventListener("click", (e) => {
+  let clickedOnclickerElements = false;
+  clickerElements.forEach((item) => {
+    if (item.contains(e.target)) {
+      clickedOnclickerElements = true;
+    }
+  });
+  if (!clickedOnclickerElements) {
+    clickerElements.forEach((item) => {
+      item.classList.remove("active");
+    });
+  }
+});
+
+
+
+//-----------------------------------------------------
+
+
+//class for secele file
+class selectFile {
+  constructor(selectFileContaner) {
+    this.contaner = selectFileContaner;
+    this.fileBtn = this.contaner.querySelector("#resumefile");
+    this.removeableItems = selectFileContaner.querySelector(".removeableItems");
+    this.setFileBtnEvent();
+  }
+
+  setFileBtnEvent() {
+    this.fileBtn.addEventListener(
+      "change",
+      this.fileBtnEventHandler.bind(this)
+    );
+  }
+
+  fileBtnEventHandler(e) {
+    const fileBtn = e.target;
+    let newItem = `<span><span class="remove">×</span>${fileBtn.files[0].name}</span>`;
+    this.removeableItems.innerHTML += newItem;
+    this.removeBtnsSetEvent();
+  }
+  removeBtnsSetEvent() {
+    const removeBtns = this.removeableItems.querySelectorAll(".remove");
+    const fileBtn = this.fileBtn;
+    removeBtns.forEach((item) => {
+      item.addEventListener("click", function () {
+        let item = this.parentNode;
+        item.remove();
+        fileBtn.value = "";
+      });
+    });
+  }
+}
+
+const selectFileSection = dc.query(".select-file");
+const selectFileSectionObject = new selectFile(selectFileSection);
